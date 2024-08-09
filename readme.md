@@ -336,6 +336,8 @@ What was the difference? In the first example, we didn't specify the data type o
 
 ### 3.3 Managing Source Code in Files
 
+First off, it's good to have [this](https://docs.snowflake.com/en/developer-guide/snowpark/reference/python/1.20.0/snowpark/api/snowflake.snowpark.udf.UDFRegistration.register#snowflake.snowpark.udf.UDFRegistration.register) documentation handy.
+
 If you're working on a large project, you might want to manage your UDFs, Stored Procedures, and other Snowflake objects in source files. This makes it easier to version control, manage, and deploy your code.
 
 In the case of Python UDFs or Procedures, you can write a `.py` file, and define the functions there, allowing your code to be more modular and organized. Then you can register the UDFs or Procedures from the file.
@@ -356,6 +358,53 @@ session.udf.register_from_file(
     replace=True,
 )
 ```
+
+### 3.4 Imports and Requirements
+
+Going off of managing Source Code, you'll likely have some imports of other modules or libraries in your UDFs or Procedures. Make sure to include these in your source files, or in your requirements file.
+
+```python
+from snowflake.snowpark import Session
+
+session = Session.builder.configs(connection_parameters).create()
+
+# Register UDFs from a Python file
+session.udf.register_from_file(
+    file_path='path/to/udfs.py',
+    func_name='good_udf',
+    return_type=IntegerType(),
+    input_types=[IntegerType()],
+    is_permanent=True,
+    stage_location='@your_stage_location',
+    replace=True,
+    imports=['/path/to/other/module.py'],
+    packages=['numpy', 'pandas==1.5.*'],
+)
+```
+
+If you want to upload a whole with multiple files in one go, you can zip it up and upload it.
+
+```python
+from snowflake.snowpark import Session
+
+session = Session.builder.configs(connection_parameters).create()
+
+# Register UDFs from a Python file
+session.udf.register_from_file(
+    file_path='path/to/udfs.py',
+    func_name='good_udf',
+    return_type=IntegerType(),
+    input_types=[IntegerType()],
+    is_permanent=True,
+    stage_location='@your_stage_location',
+    replace=True,
+    imports=['/path/to/full_module.zip'],
+    packages=['numpy', 'pandas==1.5.*'],
+)
+```
+
+
+
 
 
 
