@@ -3,9 +3,9 @@
 Author: Branden Ciranni, Solutions Engineer @ Snowflake ❄️   
 Email: branden.ciranni@snowflake.com
 
-### TLDR: Writing good code is better than writing bad code :)
+### TLDR: The steps below should help you get started doing more on Snowpark :)
 
-In this guide, I'll give you some pointers on writing better code with Snowpark, and hopefully making your life a bit easier.
+In this guide, I'll give you some pointers on getting the most out of Snowpark, and hopefully making your life a bit easier.
 
 
 ## 1. Less Bulky Session Management
