@@ -62,7 +62,7 @@ test -d ~/.snowflake/
 If you don't have one, go ahead and create a `~/.snowflake` directory.
 
 ```bash
-mkdir `~/.snowflake`
+mkdir ~/.snowflake
 ```
 
 and within here, we need to make a file `connections.toml`.
