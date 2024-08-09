@@ -245,8 +245,8 @@ flowchart TD
 
     start -- Yes --> data_size
 
-    data_size -- Small to medium --> std_udf
-    data_size -- Large --> compute_bound
+    data_size --> small_data --> std_udf
+    data_size --> large_data --> compute_bound
 
     compute_bound -- Yes --> parallelizable
     compute_bound -- No --> io_bound
